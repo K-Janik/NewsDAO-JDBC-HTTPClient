@@ -1,0 +1,65 @@
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<div class="text-center">
+<button class="btn btn-primary btn-lg" (click)="addInfo(null)">Add Info</button>
+</div>
+<div class="container" id="main-container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th style="text-align:center">#</th>
+            <th id="click-me" style="text-align:center">Info</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let info of infos">
+          <tr>
+            <th scope="row" >{{info?.number}}</th>
+            <td>{{info?.text}}</td>
+            <div class="card-body">
+            <div class="float-right btn-group btn-group-sm">
+            <a href="#" (click)="onOpenModal(info, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+            </div>
+            </div>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="updateInfoModal" tabindex="-1" role="dialog" aria-labelledby="updateInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateInfoModalLabel">Edit Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="form-group">
+            <!--            <label for="carId">ID</label>-->
+            <!--            <input type="text" ngModel="{{editCar?.carId}}" name="carId" class="form-control" id="carId" placeholder="ID">-->
+            <input type="hidden" ngModel="{{editInfo?.number}}" name="number" class="form-control" id="number" placeholder="Number">
+          </div>
+          <div class="form-group">
+            <label for="text">Text</label>
+            <input type="text" ngModel="{{editInfo?.text}}" name="text" class="form-control" id="text" placeholder="Text">
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+            <button (click)="onUpdateInfoById(editInfo?.number,editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
